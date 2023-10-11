@@ -1,0 +1,19 @@
+{% extends "mabase.html.twig" %}
+
+{% block body %}
+ <h1>Page somme</h1>
+ la somme de {{ a }} et {{ b }} est : {{ som }}
+ <a href="{{path('app_default')}}">Aller a Default</a>
+{% endblock %}    
+   
+{% block sousmenu %}
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="#">Maison</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Lien</a>
+        </li>
+
+        <hr>
+        
+ {% endblock %}
