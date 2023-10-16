@@ -1,0 +1,12 @@
+{% extends 'mabase.html.twig' %}
+
+{% block title %}Hello ProductController!{% endblock %}
+
+{% block body %}
+<h1>Liste des produits</h1>
+{% for p in products %}
+ {{ p.name }}<br>
+    
+{% endfor %}
+
+{% endblock %}
