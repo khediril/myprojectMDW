@@ -1,0 +1,44 @@
+{% extends 'mabase.html.twig' %}
+
+{% block title %}Hello ProductController!
+{% endblock %}
+
+{% block body %}
+{# valeur de product :{{ dump(product)}} #}
+	<div class="container">
+		
+		{% if product %}
+        <h1>Fiche produit : {{ product.name }}</h1>
+        <table class="table table-striped">
+
+			<tbody>
+				<tr>
+					<th scope="row">ID</th>
+					<td>{{ product.id }}</td>
+				</tr>
+				<tr>
+					<th scope="row">Name</th>
+					<td>{{ product.name }}</td>
+				</tr>
+				<tr>
+					<th scope="row">Price</th>
+					<td>{{ product.price }}</td>
+				</tr>
+
+
+				<tr>
+					<th scope="row">Description</th>
+					<td>{{ product.description }}</td>
+				</tr>
+
+
+			</tbody>
+		</table>
+	</div>
+    {% else %}
+        <div class="alert alert-danger" role="alert">
+  id incorrect
+</div>
+   {% endif %}
+
+{% endblock %}
