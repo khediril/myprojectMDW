@@ -8,10 +8,10 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-
+#[Route('/product', name: 'product_')]
 class ProductController extends AbstractController
 {
-    #[Route('/', name: 'app_product')]
+    #[Route('/', name: 'list')]
     //public function list(EntityManagerInterface $entityManager): Response
     public function list(ProductRepository $repos): Response
     {
@@ -24,7 +24,7 @@ class ProductController extends AbstractController
             'products' => $products,
         ]);
     }
-    #[Route('/{id}', name: 'app_product_show')]
+    #[Route('/{id}', name: 'show')]
     //public function list(EntityManagerInterface $entityManager): Response
     public function show(ProductRepository $repos,$id): Response
     {
@@ -43,7 +43,7 @@ class ProductController extends AbstractController
             'product' => $product,
         ]);
     }
-    #[Route('/new/{name}/{price}', name: 'app_product_new')]
+    #[Route('/new/{name}/{price}', name: 'new')]
     //public function list(EntityManagerInterface $entityManager): Response
     public function add($name,$price,EntityManagerInterface $entityManager): Response
     {
@@ -63,7 +63,7 @@ class ProductController extends AbstractController
             
         ]);
     }
-    #[Route('/delete/{id}', name: 'app_product_delete')]
+    #[Route('/delete/{id}', name: 'delete')]
     //public function list(EntityManagerInterface $entityManager): Response
     public function delete(ProductRepository $repos,$id,EntityManagerInterface $entityManager): Response
     {
@@ -85,5 +85,6 @@ class ProductController extends AbstractController
             'product' => $product,
         ]);*/
     }
+    
     
 }
