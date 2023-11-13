@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Product;
+use App\Form\ProductType;
 use App\Repository\ProductRepository;
 use App\Repository\CategorieRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -21,7 +22,7 @@ class ProductController extends AbstractController
         ]);
     }
 
-    #[Route('/product/{id}', name: 'app_product_show')]
+    #[Route('/product/{id}', name: 'app_product_show',requirements: ['id' => '\d+'])]
     public function show(ProductRepository $repos,$id): Response
     {
         $product = $repos->find($id) ;
@@ -56,6 +57,32 @@ class ProductController extends AbstractController
             'produit' => $produit,
         ]);*/
     }
+    #[Route('/product/add2', name: 'app_product_add2')]
+    public function add2(CategorieRepository $repos,EntityManagerInterface $entityManager): Response
+    {
+        $produit = new Product();
+        $form = $this->createForm(ProductType::class,$produit);
+      
+        /* $produit = new Product();
+        $produit->setName($name);
+        $produit->setPrice($price);
+        $produit->setDescription("Bon produit");
+        $categorie = $repos->find($idcateg);
+        $produit->setCategorie($categorie);
+        
+        $entityManager->persist($produit);
+        $entityManager->flush();
+        
+        $this->addFlash(
+            'notice',
+            'Produit ajoute avec succes...'
+        );*/
+        return $this->render('product/add2.html.twig',['monform'=>$form]);
+      /*  return $this->render('product/add.html.twig', [
+            'produit' => $produit,
+        ]);*/
+    }
+
     #[Route('/product/delete/{id}', name: 'app_product_delete')]
     public function delete(EntityManagerInterface $entityManager,ProductRepository $repos,$id): Response
     {

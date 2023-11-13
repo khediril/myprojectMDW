@@ -1,0 +1,17 @@
+{% extends 'mabase.html.twig' %}
+
+{% block title %}Liste des produits{% endblock %}
+
+{% block main %}
+ 
+  <div class="container">
+ 
+   <h1>Ajout d'un Produit</h1>
+   {{ form_start(monform) }}
+   {{ form_widget(monform)}}
+   <input type="submit" value="Save">
+   {{ form_end(monform) }}
+
+  </div>
+
+{% endblock %}
