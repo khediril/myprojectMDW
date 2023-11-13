@@ -1,0 +1,45 @@
+{% extends 'mabase.html.twig' %}
+
+{% block title %}Liste des produits{% endblock %}
+
+{% block main %}
+
+{% for message in app.flashes('notice') %}
+    <div class="alert alert-success">
+        {{ message }}
+    </div>
+{% endfor %}
+
+
+
+   <h1>Liste des Produits</h1>
+   
+  <div class="container">
+    
+<h1>Liste des Produits : tableau</h1>
+<table class="table table-success table-striped">
+  <thead>
+    <tr>
+      <th scope="col">ID</th>
+      <th scope="col">NAME</th>
+      <th scope="col">Detail</th>
+      <th scope="col">Supprimer</th>
+    </tr>
+  </thead>
+  <tbody>
+  {% for p in produits %}
+    
+ 
+    <tr>
+      <th scope="row">{{p.id}}</th>
+      <td>{{p.name}}</td>
+       <td><a class="btn btn-success" href="{{ path('app_product_show',{'id':p.id}) }}">Detail</a></td>
+       <td><a class="btn btn-danger" href="{{ path('app_product_delete',{'id':p.id}) }}">Supprimer</a></td>
+    </tr>
+     {% endfor %}
+  </tbody>
+</table>
+
+  </div>
+
+{% endblock %}

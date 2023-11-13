@@ -1,0 +1,12 @@
+
+   
+{% extends "mabase.html.twig" %}
+
+{% block title %} index2 {% endblock %}
+{% block main %}
+
+ La somme de {{ a }} et {{ b }} = {{ som }} <br>
+
+ <a href="{{ path('app_default2')}}"> aller a page default2 </a>
+ <img src="{{ asset('images/iset.jpeg') }}">
+{% endblock %}

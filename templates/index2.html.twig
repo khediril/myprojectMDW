@@ -1,0 +1,13 @@
+{% extends "mabase.html.twig" %}
+
+{% block title %} index2 {% endblock %}
+{% block main %}
+
+<h1>Ma premiere page</h1>
+    Nom : {{ nom }}
+    <ul>
+    {% for elem in liste %}
+        <li>{{ elem }}</li>
+    {% endfor %}
+
+{% endblock %}
