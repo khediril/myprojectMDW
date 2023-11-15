@@ -12,6 +12,9 @@
 				<tr>
 					<th scope="col">ID</th>
 					<th scope="col">Name</th>
+                   <th scope="col">Les produits</th>
+                   <th scope="col">detail</th>
+                   <th scope="col">Supprimer</th>
                    
 				</tr>
 			</thead>
@@ -22,6 +25,11 @@
 					<tr>
 						<th scope="row">{{ c.id }}</th>
 						<td>{{ c.name }}</td>
+						
+						
+						<td>{% for p in c.products %}
+							{{ p.name }},
+						{% endfor %}</td>
                         <td><a href="{{ path("categorie_show",{"id":c.id})}}">Detail</a></td>
 					    <td><a href="{{ path("categorie_delete",{"id":c.id})}}">Supprimer</a></td>
 					</tr>

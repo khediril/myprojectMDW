@@ -6,13 +6,13 @@
 {% block body %}
 	
 	<div class="container">
-    <h1>Liste des produits</h1>
+    <h1>Liste des produits ayant un prix compris entre {{ min}} et {{ max }}</h1>
 		<table class="table table-striped">
 			<thead>
 				<tr>
 					<th scope="col">ID</th>
-					<th scope="col">Name</th>
-					<th scope="col">Categorie</th>
+					<th scope="col">Nom</th>
+					<th scope="col">Prix</th>
                     <th scope="col">Details</th>
 					<th scope="col">Supprimer</th>
 				</tr>
@@ -24,7 +24,7 @@
 					<tr>
 						<th scope="row">{{ p.id }}</th>
 						<td>{{ p.name }}</td>
-						<td>{{ p.categorie.name }}</td>
+						<td>{{ p.price }}</td>
                         <td><a href="{{ path("product_show",{"id":p.id})}}">Detail</a></td>
 					    <td><a href="{{ path("product_delete",{"id":p.id})}}">Supprimer</a></td>
 					</tr>

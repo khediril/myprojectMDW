@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Product;
+use App\Form\ProductType;
 use App\Repository\ProductRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Response;
@@ -22,6 +23,31 @@ class ProductController extends AbstractController
         
         return $this->render('product/index.html.twig', [
             'products' => $products,
+        ]);
+    }
+    #[Route('/new', name: 'list')]
+    //public function list(EntityManagerInterface $entityManager): Response
+    public function newProduct(ProductRepository $repos): Response
+    {
+        $product = new Product();
+        $form = $this->createForm(ProductType::class,$product);
+       
+        
+        return $this->render('product/newproduct.html.twig', [
+            'form' => $form,
+        ]);
+    }
+    #[Route('/byprice/{pmin}/{pmax}', name: 'byprice')]
+    //public function list(EntityManagerInterface $entityManager): Response
+    public function listByPrice(ProductRepository $repos,$pmin,$pmax): Response
+    {
+       // $repos = $entityManager->getRepository(Product::class);
+        
+        $products = $repos->findByPrice2($pmin,$pmax);
+        //dd($products);
+        
+        return $this->render('product/byprice.html.twig', [
+            'products' => $products,'min' => $pmin,'max' => $pmax
         ]);
     }
     #[Route('/{id}', name: 'show')]
