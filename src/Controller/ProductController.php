@@ -6,6 +6,7 @@ use App\Entity\Product;
 use App\Form\ProductType;
 use App\Repository\ProductRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -25,18 +26,36 @@ class ProductController extends AbstractController
             'products' => $products,
         ]);
     }
-    #[Route('/new', name: 'list')]
+
+
+    #[Route('/new', name: 'new_product')]
     //public function list(EntityManagerInterface $entityManager): Response
-    public function newProduct(ProductRepository $repos): Response
+    public function newProduct(EntityManagerInterface $entityManager,Request $request): Response
     {
         $product = new Product();
         $form = $this->createForm(ProductType::class,$product);
-       
-        
-        return $this->render('product/newproduct.html.twig', [
+        //traitement du formulaire
+     //   dd($form);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            // $form->getData() holds the submitted values
+            // but, the original `$task` variable has also been updated
+            $product = $form->getData();
+           // dd($product);
+            $entityManager->persist($product);
+            $entityManager->flush();
+            $this->addFlash("info","Le produit ".$product->getName()." a ete ajoiute avec succes");
+            // ... perform some action, such as saving the task to the database
+
+            return $this->redirectToRoute('product_list');
+        }
+             return $this->render('product/newproduct.html.twig', [
             'form' => $form,
         ]);
     }
+
+
+
     #[Route('/byprice/{pmin}/{pmax}', name: 'byprice')]
     //public function list(EntityManagerInterface $entityManager): Response
     public function listByPrice(ProductRepository $repos,$pmin,$pmax): Response
@@ -105,7 +124,8 @@ class ProductController extends AbstractController
         }*/
         $entityManager->remove($product);
         $entityManager->flush();
-        return $this->redirectToRoute("app_product");
+        $this->addFlash("info","Le produit ".$product->getName()." a ete supprime avec succes");
+        return $this->redirectToRoute("product_list");
         
       /*  return $this->render('product/show.html.twig', [
             'product' => $product,

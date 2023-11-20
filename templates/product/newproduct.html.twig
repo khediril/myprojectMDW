@@ -6,7 +6,21 @@
 {% block body %}
 	{# valeur de product :{{ dump(product)}} #}
 	<div class="container">
-		{{ form(form) }}
+		{# form(form) #}
+		{{ form_start(form) }}
+		<div class="form-control">
+    <i class="fa fa-calendar"></i> {{ form_label(form.name) }}
+    {{ form_widget(form.name) }}
+
+    <small>{{ form_help(form.name) }}</small>
+
+    <div class="form-error">
+        {{ form_errors(form.name) }}
+    </div>
+</div>
+		{{ form_row(form.price) }}
+		{{ form_row(form.description) }}
+		{{ form_end(form) }}
 	</div>
 
 {% endblock %}

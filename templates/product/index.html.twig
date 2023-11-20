@@ -6,6 +6,12 @@
 {% block body %}
 	
 	<div class="container">
+	{% for message in app.flashes('info') %}
+   
+	<div class="alert alert-success" role="alert">
+  {{ message }}
+</div>
+{% endfor %}
     <h1>Liste des produits</h1>
 		<table class="table table-striped">
 			<thead>
@@ -24,7 +30,7 @@
 					<tr>
 						<th scope="row">{{ p.id }}</th>
 						<td>{{ p.name }}</td>
-						<td>{{ p.categorie.name }}</td>
+						<td>{# p.categorie.name #}</td>
                         <td><a href="{{ path("product_show",{"id":p.id})}}">Detail</a></td>
 					    <td><a href="{{ path("product_delete",{"id":p.id})}}">Supprimer</a></td>
 					</tr>
